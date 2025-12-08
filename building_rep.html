@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Rep Notification Form</title>
+    
+    <link rel="icon" type="image/png" href="https://files.constantcontact.com/3720c3fd901/10017eb4-f7d2-424d-92ed-c1b5424b9869.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: '#152a40', red: '#bf2726' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Document Styles */
+        body { background-color: #f3f4f6; padding: 20px; }
+        .paper-doc {
+            background: white;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        /* PDF specific overrides */
+        .pdf-mode .print-hide { display: none !important; }
+        .pdf-mode { box-shadow: none !important; margin: 0 !important; width: 100% !important; max-width: none !important; }
+        .pdf-mode input, .pdf-mode textarea { 
+            border: none !important; 
+            border-bottom: 1px solid #000 !important; 
+            padding: 0 !important; 
+            background: transparent !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="max-w-[8.5in] mx-auto mb-4 print-hide">
+        <a href="index.html" class="text-navy font-bold hover:underline">← Back to Guidelines</a>
+    </div>
+
+    <!-- This container is what gets downloaded -->
+    <div id="document-content" class="paper-doc">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-start mb-8 border-b-2 border-navy pb-4">
+            <div>
+                <h1 class="text-2xl font-black text-navy uppercase tracking-wide">Building Representative</h1>
+                <h2 class="text-lg font-bold text-red uppercase">Notification of Fire Watch Responsibilities</h2>
+            </div>
+            <img src="https://files.constantcontact.com/3720c3fd901/10017eb4-f7d2-424d-92ed-c1b5424b9869.png" class="h-20">
+        </div>
+
+        <!-- Content -->
+        <div class="space-y-6 text-justify text-gray-800 leading-relaxed font-serif">
+            <p>
+                I, <input type="text" placeholder="Your Name" class="border-b-2 border-gray-300 focus:border-navy outline-none px-2 w-64 font-bold text-navy bg-yellow-50">, hereby acknowledge that the fire protection system protecting the property located at <input type="text" placeholder="Property Address" class="border-b-2 border-gray-300 focus:border-navy outline-none px-2 w-full mt-2 font-bold text-navy bg-yellow-50">, Denton, TX has been rendered ineffective and a fire watch must be posted until such a time that the fire protection system is fully operational. 
+            </p>
+            <p>
+                I further acknowledge that I am responsible to <strong>ESTABLISH, INSTRUCT, AND MAINTAIN</strong> the required fire watch throughout the building or property. Failure to follow this order will make me subject to prosecution. If a fire or injuries result from a failure to comply with this order, I may be liable for damages to persons or property under provisions of the City Ordinance adopting the Fire Code.
+            </p>
+            <p class="text-sm border-l-4 border-navy pl-4 italic text-gray-600">
+                I have received a copy of the Fire Watch Designee Notification of Fire Watch Responsibilities Form that must be signed by each person designated to conduct the fire watch. I have also received the Fire Watch Procedures and Fire Watch Log that must be maintained throughout the duration of the fire watch. I understand that the fire watch may only be terminated upon approval from the Denton Fire Code Official.
+            </p>
+
+            <!-- Signatures -->
+            <div class="grid grid-cols-2 gap-12 mt-12 pt-8">
+                <div>
+                    <label class="block text-xs uppercase text-gray-500 font-bold mb-1">Building Representative (Sign/Print)</label>
+                    <input type="text" class="w-full border-b border-black outline-none py-1">
+                    <label class="block text-xs uppercase text-gray-500 font-bold mt-4 mb-1">Date</label>
+                    <input type="date" class="w-full border-b border-black outline-none py-1">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase text-gray-500 font-bold mb-1">Fire Code Official</label>
+                    <input type="text" class="w-full border-b border-black outline-none py-1 bg-gray-50" disabled placeholder="(Office Use Only)">
+                    <label class="block text-xs uppercase text-gray-500 font-bold mt-4 mb-1">Date</label>
+                    <input type="date" class="w-full border-b border-black outline-none py-1 bg-gray-50" disabled>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons (Hidden in PDF) -->
+        <div class="mt-12 flex flex-col sm:flex-row gap-4 print-hide border-t pt-6">
+            <button onclick="generatePDF()" class="flex-1 bg-navy text-white font-bold py-3 px-4 rounded hover:bg-gray-800 transition text-center shadow-lg">
+                ⬇️ Download as PDF
+            </button>
+            <button onclick="emailForm()" class="flex-1 bg-white border-2 border-navy text-navy font-bold py-3 px-4 rounded hover:bg-gray-50 transition text-center shadow-sm">
+                📧 Email to Fire Prevention
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function generatePDF() {
+            const element = document.getElementById('document-content');
+            element.classList.add('pdf-mode'); // Apply print styles
+
+            const opt = {
+                margin: 0.5,
+                filename: 'Building_Rep_Notification.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.classList.remove('pdf-mode'); // Revert styles
+            });
+        }
+
+        function emailForm() {
+            window.location.href = `mailto:FirePrevention@cityofdenton.com?subject=Fire Watch Form Submission&body=Please find the attached PDF.`;
+            setTimeout(() => { alert("Please attach the downloaded PDF to your email."); }, 1000);
+        }
+    </script>
+</body>
+</html>
