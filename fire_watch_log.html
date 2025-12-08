@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Watch Log</title>
+    
+    <link rel="icon" type="image/png" href="https://files.constantcontact.com/3720c3fd901/10017eb4-f7d2-424d-92ed-c1b5424b9869.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { navy: '#152a40', red: '#bf2726' } } }
+        }
+    </script>
+    <style>
+        body { background-color: #f3f4f6; padding: 20px; }
+        .paper-doc { background: white; max-width: 8.5in; margin: 0 auto; padding: 40px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); min-height: 11in; }
+        .pdf-mode .print-hide { display: none !important; }
+        .pdf-mode { box-shadow: none !important; margin: 0 !important; width: 100% !important; max-width: none !important; min-height: 0 !important;}
+        .pdf-mode input { border: none !important; background: transparent !important; }
+        input[type="text"] { font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #152a40; }
+    </style>
+</head>
+<body>
+
+    <div class="max-w-[8.5in] mx-auto mb-4 print-hide">
+        <a href="index.html" class="text-navy font-bold hover:underline">← Back to Guidelines</a>
+    </div>
+
+    <div id="document-content" class="paper-doc">
+        
+        <div class="flex justify-between items-center mb-6 border-b-4 border-navy pb-4">
+            <h1 class="text-3xl font-black text-navy uppercase tracking-widest">Fire Watch Log</h1>
+            <img src="https://files.constantcontact.com/3720c3fd901/10017eb4-f7d2-424d-92ed-c1b5424b9869.png" class="h-16">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6 bg-gray-50 p-4 border border-gray-300">
+            <div><label class="text-xs font-bold text-gray-500 uppercase">Premises</label><input type="text" class="w-full bg-white border border-gray-300 p-1"></div>
+            <div><label class="text-xs font-bold text-gray-500 uppercase">Address</label><input type="text" class="w-full bg-white border border-gray-300 p-1"></div>
+            <div><label class="text-xs font-bold text-gray-500 uppercase">Ordered By</label><input type="text" class="w-full bg-white border border-gray-300 p-1"></div>
+            <div><label class="text-xs font-bold text-gray-500 uppercase">Received By</label><input type="text" class="w-full bg-white border border-gray-300 p-1"></div>
+            <div class="col-span-2 flex gap-4 text-sm font-bold items-center border-t pt-2 mt-2">
+                <span>Check Interval:</span>
+                <label><input type="checkbox"> 60-min</label>
+                <label><input type="checkbox"> 30-min</label>
+                <label><input type="checkbox"> 15-min</label>
+            </div>
+        </div>
+
+        <table class="w-full border-collapse border border-gray-300 mb-6 text-sm">
+            <thead>
+                <tr class="bg-navy text-white text-center">
+                    <th class="border p-2 w-24">Time</th>
+                    <th class="border p-2">Area(s) Checked</th>
+                    <th class="border p-2">Conditions</th>
+                    <th class="border p-2 w-16">Initials</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 12 Rows for a standard shift -->
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+                <tr><td class="border p-1"><input type="text" class="w-full text-center"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full"></td><td class="border p-1"><input type="text" class="w-full text-center"></td></tr>
+            </tbody>
+        </table>
+
+        <div class="mt-8 border-t-2 border-black pt-4">
+            <h4 class="font-bold text-navy mb-2 uppercase tracking-wide">Termination Authorization</h4>
+            <div class="grid grid-cols-2 gap-8 text-sm">
+                <div>
+                    <label class="block font-bold text-gray-500">Building Rep Name:</label>
+                    <input type="text" class="w-full border-b border-gray-400">
+                </div>
+                <div>
+                    <label class="block font-bold text-gray-500">Time Terminated:</label>
+                    <input type="text" class="w-full border-b border-gray-400">
+                </div>
+                <div>
+                    <label class="block font-bold text-gray-500">Fire Dept Official:</label>
+                    <input type="text" class="w-full border-b border-gray-400">
+                </div>
+                <div>
+                    <label class="block font-bold text-gray-500">Repair Company:</label>
+                    <input type="text" class="w-full border-b border-gray-400">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 flex flex-col sm:flex-row gap-4 print-hide border-t pt-6">
+            <button onclick="generatePDF()" class="flex-1 bg-navy text-white font-bold py-3 px-4 rounded hover:bg-gray-800 transition text-center shadow-lg">⬇️ Download as PDF</button>
+            <button onclick="emailForm()" class="flex-1 bg-white border-2 border-navy text-navy font-bold py-3 px-4 rounded hover:bg-gray-50 transition text-center shadow-sm">📧 Email to Fire Prevention</button>
+        </div>
+    </div>
+
+    <script>
+        function generatePDF() {
+            const element = document.getElementById('document-content');
+            element.classList.add('pdf-mode');
+            const opt = { margin: 0.5, filename: 'Fire_Watch_Log.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } };
+            html2pdf().set(opt).from(element).save().then(() => { element.classList.remove('pdf-mode'); });
+        }
+        function emailForm() {
+            window.location.href = `mailto:FirePrevention@cityofdenton.com?subject=Fire Watch Log&body=Please find the attached PDF.`;
+            setTimeout(() => { alert("Please attach the downloaded PDF to your email."); }, 1000);
+        }
+    </script>
+</body>
+</html>
