@@ -248,8 +248,8 @@
 
             // Generate the QR code only if we are opening it
             if (!modal.classList.contains('hidden')) {
-                // Uses a free public API to generate a QR code for the current URL
-                const currentUrl = window.location.href;
+                // Uses a free public API to generate a QR code for the specific URL
+                const currentUrl = 'https://dentonfire.github.io/Fire-Watch/';
                 qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentUrl)}`;
             }
         }
